@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
       items.set(position, newText);
       itemsAdapter.notifyDataSetChanged();
       writeItems();
-      Toast.makeText(this, "TODO Updated!", Toast.LENGTH_SHORT).show();
     }
   }
 
@@ -61,6 +60,15 @@ public class MainActivity extends AppCompatActivity {
         data.putExtra(KEY_POSITION, position);
         data.putExtra(KEY_ITEM, value);
         startActivityForResult(data, REQUEST_VALUE);
+      }
+    });
+    lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+      @Override
+      public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        items.remove(position);
+        itemsAdapter.notifyDataSetChanged();
+        writeItems();
+        return true;
       }
     });
   }
